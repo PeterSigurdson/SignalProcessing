@@ -117,36 +117,36 @@ img = sine2d .* gaus2d;
 
 
 % %%% white noise
-% img = randn(size(img));
-% 
-% 
-% %%% portrait
-% lenna = imread('Lenna.png');
-% imgL  = double(mean(lenna,3));
-% 
-% 
-% %%% low-pass filtered Lenna
-% width = .1;   % width of gaussian (normalized Z units)
-% [x,y] = ndgrid(zscore(1:size(imgL,1)),zscore(1:size(imgL,2)));
-% gaus2d= exp(-(x.^2 + y.^2) ./ (2*width^2)); % add 1- at beginning to invert filter
-% imgX  = fftshift(fft2(imgL));
-% img   = real(ifft2(fftshift(imgX.*gaus2d)));
-% 
-% 
-% %%% high-pass filtered Lenna
-% width = .3;   % width of gaussian (normalized Z units)
-% [x,y] = ndgrid(zscore(1:size(imgL,1)),zscore(1:size(imgL,2)));
-% gaus2d= 1-(exp(-(x.^2 + y.^2) ./ (2*width^2))); % add 1- at beginning to invert filter
-% imgX  = fftshift(fft2(imgL));
-% img   = real(ifft2(fftshift(imgX.*gaus2d)));
-% 
-% 
-% 
-% %%% phase-scrambled Lenna
-% imgX  = fftshift(fft2(imgL));
-% powr2 = abs(imgX);
-% phas2 = angle(imgX);
-% img   = real(ifft2(fftshift( powr2.*exp(1i*reshape(phas2(randperm(numel(phas2))),size(phas2))) )));
+img = randn(size(img));
+
+
+%%% portrait
+puppy = imread('bichon.jpg');
+imgL  = double(mean(puppy,3));
+
+
+%%% low-pass filtered puppy
+width = .1;   % width of gaussian (normalized Z units)
+[x,y] = ndgrid(zscore(1:size(imgL,1)),zscore(1:size(imgL,2)));
+gaus2d= exp(-(x.^2 + y.^2) ./ (2*width^2)); % add 1- at beginning to invert filter
+imgX  = fftshift(fft2(imgL));
+img   = real(ifft2(fftshift(imgX.*gaus2d)));
+
+
+%%% high-pass filtered puppy
+width = .3;   % width of gaussian (normalized Z units)
+[x,y] = ndgrid(zscore(1:size(imgL,1)),zscore(1:size(imgL,2)));
+gaus2d= 1-(exp(-(x.^2 + y.^2) ./ (2*width^2))); % add 1- at beginning to invert filter
+imgX  = fftshift(fft2(imgL));
+img   = real(ifft2(fftshift(imgX.*gaus2d)));
+
+
+
+%%% phase-scrambled puppy
+imgX  = fftshift(fft2(imgL));
+powr2 = abs(imgX);
+phas2 = angle(imgX);
+img   = real(ifft2(fftshift( powr2.*exp(1i*reshape(phas2(randperm(numel(phas2))),size(phas2))) )));
 
 
 
