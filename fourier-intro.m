@@ -128,7 +128,7 @@ imgL  = double(mean(puppy,3));
 %%% low-pass filtered puppy
 width = .1;   % width of gaussian (normalized Z units)
 [x,y] = ndgrid(zscore(1:size(imgL,1)),zscore(1:size(imgL,2)));
-gaus2d= exp(-(x.^2 + y.^2) ./ (2*width^2)); % add 1- at beginning to invert filter
+gaus2d= exp(-(x.^3 + y.^3) ./ (2*width^2)); % add 1- at beginning to invert filter
 imgX  = fftshift(fft2(imgL));
 img   = real(ifft2(fftshift(imgX.*gaus2d)));
 
@@ -147,10 +147,6 @@ imgX  = fftshift(fft2(imgL));
 powr2 = abs(imgX);
 phas2 = angle(imgX);
 img   = real(ifft2(fftshift( powr2.*exp(1i*reshape(phas2(randperm(numel(phas2))),size(phas2))) )));
-
-
-
-
 
 % power and phase spectra
 imgX  = fftshift(fft2(img));
